@@ -4,16 +4,16 @@ from itertools import groupby
 class Board:
     def __init__(self):
         self.board = [[0, 0, 1, 1, 0],
-                      [0, 0, 0, 0, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0, 0, 0],
+                      [0, 0, 2, 0, 0, 0],
+                      [0, 0, 2, 0, 0, 0, 0],
+                      [0, 2, 0, 0, 0, 0, 0, 0],
+                      [0, 2, 2, 2, 0, 2, 2, 0, 0],
                       [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
                       [1, 0, 1, 1, 0, 1, 1, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0, 0],
-                      [0, 0, 0, 0, 0, 0, 0],
+                      [0, 2, 0, 0, 2, 0, 0, 0],
+                      [0, 0, 0, 0, 0, 2, 0],
                       [1, 1, 0, 1, 0, 0],
-                      [0, 0, 0, 0, 0]]
+                      [0, 2, 0, 0, 0]]
         self.score = 0
         self.main_diagonals = [[[0, 0], [1, 0], [2, 0], [3, 0], [4, 0], [5, 0]],
                                [[0, 1], [1, 1], [2, 1], [3, 1], [4, 1], [5, 1], [6, 0]],
@@ -43,35 +43,94 @@ class Board:
     def get_score(self):
         return self.score
 
+    def set_score(self, score):
+        self.score = score
+
     def insert_move(self, posx, posy, player):
         self.board[posx][posy] = player
 
-    def calculate_score(self):
-        return self.score
 
-    def calculate_main_diagonals(self):
+    def calculate_board_score(self):
+        verticals_p1 = self.calculate_verticals(1)
+        m_diagonals_p1 = self.calculate_main_diagonals(1)
+        s_diagonals_p1 = self.calculate_secondary_diagonals(1)
+
+        verticals_p2 = self.calculate_verticals(2) * (-1)
+        m_diagonals_p2 = self.calculate_main_diagonals(2) * (-1)
+        s_diagonals_p2 = self.calculate_secondary_diagonals(2) * (-1)
+
+        '''
+        empty_verticals = self.calculate_verticals(0)
+        empty_m_diagonals_p1 = self.calculate_main_diagonals(0)
+        empty_s_diagonals_p1 = self.calculate_secondary_diagonals(0)
+        self.set_score(verticals_p1 + verticals_p2 + empty_verticals + m_diagonals_p1 + m_diagonals_p2 + empty_m_diagonals_p1 + s_diagonals_p1 + s_diagonals_p2 + empty_s_diagonals_p1)
+        '''
+
+        self.set_score(verticals_p1 + verticals_p2 + m_diagonals_p1 + m_diagonals_p2 + s_diagonals_p1 + s_diagonals_p2)
+
+        return self.get_score()
+
+    def calculate_main_diagonals(self, player):
         compara = []
         lista = []
         for line in self.main_diagonals:
             for item in line:
                 compara.append(self.board[item[0]][item[1]])
-            lista.append([len(list(g[1])) for g in groupby(compara) if g[0] == 1])
+            lista.append([len(list(g[1])) for g in groupby(compara) if g[0] == player])
             compara = []
-        return lista
+        print(lista)
+        soma = 0
+        for line in lista:
+            for item in line:
+                if item == 1:
+                    soma += 15
+                elif item == 2:
+                    soma += 25
+                elif item == 3:
+                    soma += 40
+                elif item == 4:
+                    soma += 75
 
-    def calculate_secondary_diagonals(self):
+        return soma
+
+    def calculate_secondary_diagonals(self, player):
         compara = []
         lista = []
         for line in self.secondary_diagonals:
             for item in line:
                 compara.append(self.board[item[0]][item[1]])
-            lista.append([len(list(g[1])) for g in groupby(compara) if g[0] == 1])
+            lista.append([len(list(g[1])) for g in groupby(compara) if g[0] == player])
             compara = []
-        return lista
+        print(lista)
+        soma = 0
+        for line in lista:
+            for item in line:
+                if item == 1:
+                    soma += 15
+                elif item == 2:
+                    soma += 25
+                elif item == 3:
+                    soma += 40
+                elif item == 4:
+                    soma += 75
 
-    def calculate_verticals(self):
+        return soma
+
+    def calculate_verticals(self, player):
         lista = []
         for i in range(9):
-            lista.append([len(list(g[1])) for g in groupby(self.board[i]) if g[0] == 1])
+            lista.append([len(list(g[1])) for g in groupby(self.board[i]) if g[0] == player])
+        soma = 0
+        print(lista)
+        for line in lista:
+            for item in line:
+                if item == 1:
+                    soma += 15
+                elif item == 2:
+                    soma += 25
+                elif item == 3:
+                    soma += 40
+                elif item == 4:
+                    soma += 75
 
-        return lista
+        return soma
