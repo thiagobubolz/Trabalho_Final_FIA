@@ -2,6 +2,7 @@
 
 import board
 import utils
+from math import inf
 import minimax
 
 
@@ -15,7 +16,7 @@ moves = utils.get_possible_moves(tabuleiro.get_board())
 
 print(moves)
 
-score, move = minimax.minimax(tabuleiro, 2, True, [0,0])
+score, move = minimax.minimax(tabuleiro, 3, -inf, inf, True, [0,0])
 
 print("SCORE: ")
 print(score)
