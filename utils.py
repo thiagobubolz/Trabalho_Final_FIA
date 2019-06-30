@@ -8,6 +8,7 @@ def get_possible_moves(board):
     i = 0
     j = 0
     for line in board:
+        j = 0
         for item in line:
             if item == 0:
                 moves.append([i,j])
@@ -17,6 +18,6 @@ def get_possible_moves(board):
 
 
 def make_move(board, move, player):
-    board[int(move[0])][int(move[1])] = player
+    board.insert_move(int(move[0]), int(move[1]), player)
     return board
 
