@@ -7,6 +7,11 @@ import board
 from math import inf
 import utils
 import copy
+import datetime
+
+start = 0.0
+end = 0.0
+
 
 if len(sys.argv) == 1:
     print("Voce deve especificar o numero do jogador (1 ou 2)\n\nExemplo:    ./random_client.py 1")
@@ -33,6 +38,9 @@ while not done:
 
     # Se for a vez do jogador
     if player_turn == player:
+
+        start = datetime.datetime.now()
+
         # Pega o tabuleiro
         resp = urllib.request.urlopen("%s/tabuleiro" % host)
         movimentos = eval(resp.read())
@@ -44,11 +52,15 @@ while not done:
         movimentos = eval(resp.read())
         inicial_move = random.choice(movimentos)
 
+
         # Escolhe um movimento
         score, move = minimax.minimax(tabuleiro, 3, -inf, inf, True, inicial_move, 1)
+        end = datetime.datetime.now()
 
         # Executa o movimento
         print("Movimento Escolhido: " + str(move[0]+1) + "," + str(move[1]+1))
+        diff = end - start
+        print("Time H:M:S\t" + str(diff))
         resp = urllib.request.urlopen(
             "%s/move?player=%d&coluna=%d&linha=%d" % (host, player, move[0]+1, move[1]+1))
         msg = eval(resp.read())
@@ -58,7 +70,7 @@ while not done:
             print("I win")
             done = True
         #Se for um sanduiche entra aqui
-        if msg[0] == 2:
+        elif msg[0] == 2:
             # Pega os movimentos possiveis
             resp = urllib.request.urlopen("%s/movimentos" % host)
             movimentos = eval(resp.read())
@@ -68,16 +80,18 @@ while not done:
             resp = urllib.request.urlopen(
                 "%s/move?player=%d&coluna=%d&linha=%d" % (host, player, movimento[0], movimento[1]))
             msg = eval(resp.read())
-        if msg[0] < 0:
+        elif msg[0] < 0:
             if msg[0] == -5:
-                print("chegou")
+                print("movimento invalido")
                 tab2 = copy.deepcopy(tabuleiro)
                 utils.make_move(tab2, move, -1)
                 # Escolhe um movimento
                 score, move = minimax.minimax(tab2, 3, -inf, inf, True, inicial_move, 1)
-
                 # Executa o movimento
                 print("Movimento Escolhido: " + str(move[0] + 1) + "," + str(move[1] + 1))
+                end = datetime.datetime.now()
+                diff = end - start
+                print("Time H:M:S\t" + str(diff))
                 resp = urllib.request.urlopen(
                     "%s/move?player=%d&coluna=%d&linha=%d" % (host, player, move[0] + 1, move[1] + 1))
             else:

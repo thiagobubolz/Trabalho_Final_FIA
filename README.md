@@ -20,7 +20,7 @@ Use um navegador para acessar o endereço `http://localhost:8080/visualizador.ht
 
 ## Cliente
 
-Um cliente que faz jogadas aleatórias está disponível (`random_client.py`). Para utilizá-lo, rode o servidor e execute o cliente passando como parâmetro o número do jogador (1 ou 2). Pode-se rodar dois clientes simultâneamente, cada um com um número de jogador. 
+Um cliente que faz jogadas aleatórias está disponível (`client.py`). Para utilizá-lo, rode o servidor e execute o cliente passando como parâmetro o número do jogador (1 ou 2). Pode-se rodar dois clientes simultâneamente, cada um com um número de jogador. 
 
 ## API
 

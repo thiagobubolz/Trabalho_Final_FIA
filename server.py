@@ -79,6 +79,18 @@ class Game:
                 height = 15 - column
             self.board.append([0] * height)
 
+        self.board = [[1, 1, 1, 2, 0],
+                      [0, 1, 1, 2, 0, 0],
+                      [0, 0, 1, 0, 0, 0, 0],
+                      [0, 0, 0, 1, 2, 0, 0, 0],
+                      [0, 0, 2, 2, 2, 1, 0, 0, 0],
+                      [0, 0, 0, 0, 2, 2, 2, 0, 0, 0],
+                      [0, 0, 0, 1, 0, 2, 0, 0, 0],
+                      [0, 1, 0, 2, 2, 0, 0, 0],
+                      [0, 0, 2, 1, 1, 0, 0],
+                      [0, 0, 0, 0, 0, 0],
+                      [0, 0, 0, 0, 0]]
+
     def get_position(self, column, line):
         return self.board[column - 1][line - 1]
 
