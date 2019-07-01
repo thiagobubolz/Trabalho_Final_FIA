@@ -69,16 +69,19 @@ while not done:
                 "%s/move?player=%d&coluna=%d&linha=%d" % (host, player, movimento[0], movimento[1]))
             msg = eval(resp.read())
         if msg[0] < 0:
-            if msg[0] == 5:
-                utils.make_move(copy.deepcopy(tabuleiro), move, -1)
+            if msg[0] == -5:
+                print("chegou")
+                tab2 = copy.deepcopy(tabuleiro)
+                utils.make_move(tab2, move, -1)
                 # Escolhe um movimento
-                score, move = minimax.minimax(tabuleiro, 3, -inf, inf, True, inicial_move, 1)
+                score, move = minimax.minimax(tab2, 3, -inf, inf, True, inicial_move, 1)
 
                 # Executa o movimento
                 print("Movimento Escolhido: " + str(move[0] + 1) + "," + str(move[1] + 1))
                 resp = urllib.request.urlopen(
                     "%s/move?player=%d&coluna=%d&linha=%d" % (host, player, move[0] + 1, move[1] + 1))
-            raise Exception(msg[1])
+            else:
+                raise Exception(msg[1])
 
     # Descansa um pouco para nao inundar o servidor com requisicoes
     time.sleep(1)
