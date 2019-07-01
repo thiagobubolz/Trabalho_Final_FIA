@@ -9,7 +9,7 @@ class Board:
                       [0, 0, 2, 0, 0, 0, 0],
                       [0, 2, 0, 0, 0, 0, 0, 0],
                       [0, 2, 2, 2, 0, 2, 0, 0, 0],
-                      [1, 1, 1, 0, 0, 0, 0, 0, 0, 0],
+                      [1, 1, 1, 1, 0, 2, 2, 2, 2, 0],
                       [1, 0, 1, 0, 0, 1, 1, 0, 0],
                       [0, 2, 0, 0, 2, 0, 0, 0],
                       [0, 0, 0, 0, 0, 2, 0],
@@ -23,14 +23,24 @@ class Board:
     def insert_move(self, posx, posy, player):
         self.board[posx][posy] = player
 
-    def calculate_board_score(self):
-        verticals_p1 = self.calculate_verticals(1)
-        m_diagonals_p1 = self.calculate_main_diagonals(utils.main_diagonals, 1)
-        s_diagonals_p1 = self.calculate_secondary_diagonals(utils.secondary_diagonals, 1)
+    def calculate_board_score(self, player):
+        if player == 1:
+            verticals_p1 = self.calculate_verticals(1)
+            m_diagonals_p1 = self.calculate_main_diagonals(utils.main_diagonals, 1)
+            s_diagonals_p1 = self.calculate_secondary_diagonals(utils.secondary_diagonals, 1)
 
-        verticals_p2 = self.calculate_verticals(2) * (-1)
-        m_diagonals_p2 = self.calculate_main_diagonals(utils.main_diagonals, 2) * (-1)
-        s_diagonals_p2 = self.calculate_secondary_diagonals(utils.secondary_diagonals, 2) * (-1)
+            verticals_p2 = self.calculate_verticals(2) * (-1)
+            m_diagonals_p2 = self.calculate_main_diagonals(utils.main_diagonals, 2) * (-1)
+            s_diagonals_p2 = self.calculate_secondary_diagonals(utils.secondary_diagonals, 2) * (-1)
+
+        else :
+            verticals_p1 = self.calculate_verticals(2)
+            m_diagonals_p1 = self.calculate_main_diagonals(utils.main_diagonals, 2)
+            s_diagonals_p1 = self.calculate_secondary_diagonals(utils.secondary_diagonals, 2)
+
+            verticals_p2 = self.calculate_verticals(1) * (-1)
+            m_diagonals_p2 = self.calculate_main_diagonals(utils.main_diagonals, 1) * (-1)
+            s_diagonals_p2 = self.calculate_secondary_diagonals(utils.secondary_diagonals, 1) * (-1)
 
         '''
         empty_verticals = self.calculate_verticals(0)
@@ -57,11 +67,11 @@ class Board:
                 if item == 1:
                     soma += 15
                 elif item == 2:
-                    soma += 25
+                    soma += 35
                 elif item == 3:
-                    soma += 40
+                    soma += 60
                 elif item == 4:
-                    soma += 75
+                    soma += 100
                 elif item >= 5:
                     soma = inf
 
@@ -82,11 +92,11 @@ class Board:
                 if item == 1:
                     soma += 15
                 elif item == 2:
-                    soma += 25
+                    soma += 35
                 elif item == 3:
-                    soma += 40
+                    soma += 60
                 elif item == 4:
-                    soma += 75
+                    soma += 100
                 elif item >= 5:
                     soma = inf
 
@@ -103,11 +113,11 @@ class Board:
                 if item == 1:
                     soma += 15
                 elif item == 2:
-                    soma += 25
+                    soma += 35
                 elif item == 3:
-                    soma += 40
+                    soma += 60
                 elif item == 4:
-                    soma += 75
+                    soma += 100
                 elif item >= 5:
                     soma = inf
 
