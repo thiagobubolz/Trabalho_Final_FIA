@@ -51,7 +51,7 @@ while not done:
         resp = urllib.request.urlopen("%s/movimentos" % host)
         movimentos = eval(resp.read())
         inicial_move = random.choice(movimentos)
-
+        print(inicial_move)
 
         # Escolhe um movimento
         ab = [-inf, inf]
@@ -85,7 +85,7 @@ while not done:
             if msg[0] == -5:
                 print("movimento invalido")
                 tab2 = copy.deepcopy(tabuleiro)
-                utils.make_move(tab2, move, -1)
+                tab2 = utils.make_move(tab2, move, -1)
                 # Escolhe um movimento
                 ab = [-inf,inf]
                 score, move = minimax.minimax(tab2, 4, ab, True, inicial_move, 1)
