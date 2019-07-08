@@ -65,13 +65,13 @@ class Board:
         for line in lista:
             for item in line:
                 if item == 1:
-                    soma += 15
+                    soma += 0
                 elif item == 2:
                     soma += 35
                 elif item == 3:
-                    soma += 60
+                    soma += 200
                 elif item == 4:
-                    soma += 100
+                    soma += 1000
                 elif item >= 5:
                     soma = inf
 
@@ -90,13 +90,13 @@ class Board:
         for line in lista:
             for item in line:
                 if item == 1:
-                    soma += 15
+                    soma += 0
                 elif item == 2:
                     soma += 35
                 elif item == 3:
-                    soma += 60
+                    soma += 200
                 elif item == 4:
-                    soma += 100
+                    soma += 1000
                 elif item >= 5:
                     soma = inf
 
@@ -111,13 +111,13 @@ class Board:
         for line in lista:
             for item in line:
                 if item == 1:
-                    soma += 15
+                    soma += 0
                 elif item == 2:
                     soma += 35
                 elif item == 3:
-                    soma += 60
+                    soma += 200
                 elif item == 4:
-                    soma += 100
+                    soma += 1000
                 elif item >= 5:
                     soma = inf
 

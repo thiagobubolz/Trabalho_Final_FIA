@@ -2,7 +2,7 @@ import urllib.request
 import sys
 import random
 import time
-import minimax
+import minimax_ab
 import board
 from math import inf
 import utils
@@ -58,8 +58,9 @@ while not done:
         print(inicial_move)
 
         # Escolhe um movimento
-        ab = [-inf, inf]
-        score, move = minimax.minimax(tabuleiro, 4, ab, True, inicial_move, 1)
+        a = -inf
+        b = inf
+        score, move = minimax_ab.minimax(tabuleiro, 3, a, b, True, inicial_move, 1)
         end = datetime.datetime.now()
 
         # Executa o movimento
@@ -91,8 +92,9 @@ while not done:
                 tab2 = copy.deepcopy(tabuleiro)
                 tab2 = utils.make_move(tab2, move, -1)
                 # Escolhe um movimento
-                ab = [-inf,inf]
-                score, move = minimax.minimax(tab2, 4, ab, True, inicial_move, 1)
+                a = -inf
+                b = inf
+                score, move = minimax_ab.minimax(tab2, 3, a, b, True, inicial_move, 1)
                 # Executa o movimento
                 print("Movimento Escolhido: " + str(move[0] + 1) + "," + str(move[1] + 1))
                 end = datetime.datetime.now()
