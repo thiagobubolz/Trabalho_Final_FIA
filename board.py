@@ -55,70 +55,94 @@ class Board:
     def calculate_main_diagonals(self, main_diagonals, player):
         compara = []
         lista = []
+        string = []
         for line in main_diagonals:
             for item in line:
                 compara.append(self.board[item[0]][item[1]])
             lista.append([len(list(g[1])) for g in groupby(compara) if g[0] == player])
+            string.append(str(compara))
             compara = []
         #print(lista)
         soma = 0
         for line in lista:
             for item in line:
                 if item == 1:
-                    soma += 1
+                    soma += 0
                 elif item == 2:
-                    soma += 2
+                    soma += 35
                 elif item == 3:
-                    soma += 3
+                    soma += 120
                 elif item == 4:
-                    soma += 4
+                    soma += 600
                 elif item >= 5:
                     soma = inf
 
+        if player != 1:
+       		for s in string:
+        		if(s.find('0, 2, 2, 2, 0') != -1):
+        			soma = soma + 1800
+        		elif(s.find('0, 2, 2, 2, 2, 0') != -1):
+        			soma = soma + 6000 
         return soma
 
     def calculate_secondary_diagonals(self, secondary_diagonals, player):
         compara = []
         lista = []
+        string = []
         for line in secondary_diagonals:
             for item in line:
                 compara.append(self.board[item[0]][item[1]])
             lista.append([len(list(g[1])) for g in groupby(compara) if g[0] == player])
+            string.append(str(compara))
             compara = []
         #print(lista)
         soma = 0
         for line in lista:
             for item in line:
                 if item == 1:
-                    soma += 1
+                    soma += 0
                 elif item == 2:
-                    soma += 2
+                    soma += 35
                 elif item == 3:
-                    soma += 3
+                    soma += 120
                 elif item == 4:
-                    soma += 4
+                    soma += 600
                 elif item >= 5:
                     soma = inf
 
+        if player != 1:
+       		for s in string:
+        		if(s.find('0, 2, 2, 2, 0') != -1):
+        			soma = soma + 1800
+        		elif(s.find('0, 2, 2, 2, 2, 0') != -1):
+        			soma = soma + 6000          
         return soma
 
     def calculate_verticals(self, player):
         lista = []
+        string = []
         for i in range(9):
             lista.append([len(list(g[1])) for g in groupby(self.board[i]) if g[0] == player])
+            string.append(str(self.board[i]))
         soma = 0
         #print(lista)
         for line in lista:
             for item in line:
                 if item == 1:
-                    soma += 1
+                    soma += 0
                 elif item == 2:
-                    soma += 2
+                    soma += 35
                 elif item == 3:
-                    soma += 3
+                    soma += 120
                 elif item == 4:
-                    soma += 4
+                    soma += 600
                 elif item >= 5:
                     soma = inf
+        if player != 1:
+       		for s in string:
+        		if(s.find('0, 2, 2, 2, 0') != -1):
+        			soma = soma + 1800
+        		elif(s.find('0, 2, 2, 2, 2, 0') != -1):
+        			soma = soma + 6000 
 
         return soma

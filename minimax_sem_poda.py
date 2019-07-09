@@ -8,8 +8,6 @@ def minimax(tabuleiro, depth, maximizingPlayer, current_move, player):
     best_move = current_move
     score = tabuleiro.calculate_board_score(player)
 
-
-
     if depth == 0 or score == inf:
         return score, current_move
 

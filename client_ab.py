@@ -55,12 +55,10 @@ while not done:
         inicial_move[0] = inicial_move[0] - 1
         inicial_move[1] = inicial_move[1] - 1
 
-        print(inicial_move)
-
         # Escolhe um movimento
         a = -inf
         b = inf
-        score, move = minimax_ab.minimax(tabuleiro, 3, a, b, True, inicial_move, 1)
+        score, move = minimax_ab.minimax(tabuleiro, 4, a, b, True, inicial_move, 1)
         end = datetime.datetime.now()
 
         # Executa o movimento
@@ -88,13 +86,12 @@ while not done:
             msg = eval(resp.read())
         elif msg[0] < 0:
             if msg[0] == -5:
-                print("movimento invalido")
                 tab2 = copy.deepcopy(tabuleiro)
                 tab2 = utils.make_move(tab2, move, -1)
                 # Escolhe um movimento
                 a = -inf
                 b = inf
-                score, move = minimax_ab.minimax(tab2, 3, a, b, True, inicial_move, 1)
+                score, move = minimax_ab.minimax(tab2, 4, a, b, True, inicial_move, 1)
                 # Executa o movimento
                 print("Movimento Escolhido: " + str(move[0] + 1) + "," + str(move[1] + 1))
                 end = datetime.datetime.now()
